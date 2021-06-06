@@ -9,9 +9,9 @@ function App() {
   const width = window.innerWidth;
   const height = window.innerHeight;
   const [spectrumIndex, setSpectrumIndex] = useState(0);
-  const [mediaButtonText, setMediaButtonText] = useState(Strings.PLAY);
+  const [mediaButtonText, setMediaButtonText] = useState(Strings.PAUSE);
   const [meterColor, setMeterColor] = useState(MeterColors.RAINBOW);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const play = (event) => {
     event.preventDefault();
@@ -49,8 +49,9 @@ function App() {
         <button className={`media-button ${isPlaying ? 'heart-bit-neon' : 'heart-bit-neon-inactive'}`} onClick={play} id="media-button">
           {mediaButtonText}
         </button>
-        <audio controls id="audio-element" autoPlay={false} crossOrigin="anonymous">
+        <audio controls id="audio-element" autoPlay={true} crossOrigin="anonymous" preload="auto">
           <source src={Urls.PRIMARY_STREAM} type="audio/mpeg" />
+          <source src={Urls.PRIMARY_STREAM} type="audio/mp3" />
         </audio>
         {isPlaying &&
           <button className={"change-button"} onClick={changeSpectrum}>
