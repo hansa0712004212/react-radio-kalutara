@@ -1,0 +1,73 @@
+body {
+  background-color: #000;
+}
+
+audio {
+  display: none;
+}
+
+/* ##### start media buttons ##### */
+.ct-btn {
+  margin:20px;
+  display: flex;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-pack: center;
+}
+
+.media-button {
+  width: 200px;
+  height: 80px;
+  cursor:pointer;
+  font-size: 20px;
+  border-radius: 4px;
+  font-family: lato;
+}
+
+.heart-bit-neon-inactive {
+  color: #fff;
+  border: 0px solid #ff5a5a;
+  background-color: #ff5a5a;
+}
+
+.heart-bit-neon {
+  color: #fff;
+  border: 0px solid #ff5a5a;
+  background-color: #ff5a5a;
+  animation: heartBit 1.2s infinite;
+  -webkit-animation: heartBit 1.2s infinite;
+}
+
+@keyframes heartBit {
+  0%, 30% {-webkit-box-shadow: 0px 0px 30px 10px #ff5a5a;box-shadow: 0px 0px 30px 10px #ff5a5a;}
+  40%,50% {-webkit-box-shadow: 0px 0px 30px 20px #ff5a5a;box-shadow: 0px 0px 30px 20px #ff5a5a;}
+  100% {-webkit-box-shadow: 0px 0px 30px 0px #ff5a5a;box-shadow: 0px 0px 30px 0px #ff5a5a;}
+}
+
+@-webkit-keyframes heartBit {
+  0%, 30% {-webkit-box-shadow: 0px 0px 30px 10px #ff5a5a;box-shadow: 0px 0px 30px 10px #ff5a5a;}
+  40%,50% {-webkit-box-shadow: 0px 0px 30px 20px #ff5a5a;box-shadow: 0px 0px 30px 20px #ff5a5a;}
+  100% {-webkit-box-shadow: 0px 0px 30px 0px #ff5a5a;box-shadow: 0px 0px 30px 0px #ff5a5a;}
+}
+
+.change-button {
+  background-color: transparent;
+  border: 0px solid #000;
+  cursor: pointer;
+  margin-top: 40px;
+}
+
+.change-button:focus
+{
+  animation: rotateBit 1.2s;
+  -webkit-animation: rotateBit 1.2s;
+}
+
+@keyframes rotateBit {
+  0%, 50% {transform: rotate(180deg);}
+  50%,100% {transform: rotate(0deg);}
+}
+/* ##### end media buttons ##### */

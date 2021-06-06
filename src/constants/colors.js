@@ -1,0 +1,9 @@
+export const RED = "#FF5A5A";
+export const AQUA = "#00FFFF";
+export const BLUE = "#0000FF";
+export const WHITE = "#FFFFFF";
+export const GREEN = "#00FF00";
+export const BLACK = "#000000";
+export const YELLOW = "#FFFF00";
+export const ORANGE = "#FFA500";
+export const TRANSPARET = "transparent";
