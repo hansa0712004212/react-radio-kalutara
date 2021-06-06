@@ -28,7 +28,8 @@ function App() {
     }
   }
 
-  const changeSpectrum = () => {
+  const changeSpectrum = (event) => {
+    event.preventDefault();
     let player = document.getElementById("audio-element");
     let index = spectrumIndex + 1;
     if (index > MeterColors.LIST.length - 1) {
@@ -43,8 +44,8 @@ function App() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", height: height }}>
-      <RkImage source={IMAGE_LOGO} width={250} height={250} style={{ marginTop: 20 }} />
+    <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "space-between", alignItems: "center", maxHeight: height, height: height }}>
+      <RkImage source={IMAGE_LOGO} width={200} height={200} style={{ marginTop: 20 }} />
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center" }}>
         <button className={`media-button ${isPlaying ? 'heart-bit-neon' : 'heart-bit-neon-inactive'}`} onClick={play} id="media-button">
           {mediaButtonText}

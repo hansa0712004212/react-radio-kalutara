@@ -1,6 +1,8 @@
 * {
-  -ms-touch-action: manipulation;
   touch-action: manipulation;
+  -o-touch-action: manipulation;
+  -moz-touch-action: manipulation;
+  -webkit-touch-action: manipulation;
 }
 
 body {
@@ -8,7 +10,7 @@ body {
 }
 
 audio {
-  /*display: none;*/
+  display: none;
 }
 
 /* ##### start media buttons ##### */
@@ -24,8 +26,8 @@ audio {
 }
 
 .media-button {
-  width: 200px;
-  height: 80px;
+  width: 160px;
+  height: 60px;
   cursor:pointer;
   font-size: 20px;
   border-radius: 4px;
@@ -59,20 +61,39 @@ audio {
 }
 
 .change-button {
-  background-color: transparent;
-  border: 0px solid #000;
+  display: inline-block;
   cursor: pointer;
   margin-top: 40px;
+  border: 0px solid #000;
+  background-color: transparent;
 }
 
 .change-button:focus
 {
+  display: inline-block;
   animation: rotateBit 1.2s;
+  -o-animation: rotateBit 1.2s;
+  -moz-animation: rotateBit 1.2s;
   -webkit-animation: rotateBit 1.2s;
 }
 
 @keyframes rotateBit {
-  0%, 50% {transform: rotate(180deg);}
-  50%,100% {transform: rotate(0deg);}
+  0%, 50% {display: inline-block;transform: rotate(180deg); -o-transform: rotate(180deg); -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg);}
+  50%,100% {display: inline-block;transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg); -webkit-transform: rotate(0deg);}
+}
+
+@-o-keyframes rotateBit {
+  0%, 50% {display: inline-block;transform: rotate(180deg); -o-transform: rotate(180deg); -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg);}
+  50%,100% {display: inline-block;transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg); -webkit-transform: rotate(0deg);}
+}
+
+@-moz-keyframes rotateBit {
+  0%, 50% {display: inline-block;transform: rotate(180deg); -o-transform: rotate(180deg); -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg);}
+  50%,100% {display: inline-block;transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg); -webkit-transform: rotate(0deg);}
+}
+
+@-webkit-keyframes rotateBit {
+  0%, 50% {display: inline-block;transform: rotate(180deg); -o-transform: rotate(180deg); -moz-transform: rotate(180deg); -webkit-transform: rotate(180deg);}
+  50%,100% {display: inline-block;transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg); -webkit-transform: rotate(0deg);}
 }
 /* ##### end media buttons ##### */
