@@ -13,7 +13,8 @@ function App() {
   const [meterColor, setMeterColor] = useState(MeterColors.RAINBOW);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const play = () => {
+  const play = (event) => {
+    event.preventDefault();
     let player = document.getElementById("audio-element");
     if (isPlaying) {
       setMediaButtonText(Strings.PLAY);
