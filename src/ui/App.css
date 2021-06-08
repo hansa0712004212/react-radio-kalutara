@@ -5,8 +5,6 @@
   -webkit-touch-action: manipulation;
   -o-tap-highlight-color: rgba(0,0,0,0);
   -o-tap-highlight-color: transparent;
-  -moz-tap-highlight-color: rgba(0,0,0,0);
-  -moz-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent;
 }
@@ -19,11 +17,32 @@ audio {
   display: none;
 }
 
+#welcome {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  text-shadow: #000;
+  font-family: Verdana, Helvetica, sans-serif, Tahoma, sans-serif;
+  animation: glowWelcome 1s ease-in-out infinite alternate;
+  -o-animation: glowWelcome 1s ease-in-out infinite alternate;
+  -moz-animation: glowWelcome 1s ease-in-out infinite alternate;
+  -webkit-animation: glowWelcome 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowWelcome {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #33ccff, 0 0 20px #33ccff, 0 0 25px #33ccff, 0 0 30px #33ccff;
+  }
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 15px #fff, 0 0 25px #4499ff, 0 0 30px #4499ff, 0 0 35px #4499ff, 0 0 40px #4499ff;
+  }
+}
+
 /* ##### start media buttons ##### */
 .ct-btn {
-  margin:20px;
   display: flex;
   cursor: pointer;
+  margin-top: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   -ms-flex-pack: center;
@@ -32,12 +51,13 @@ audio {
 }
 
 .media-button {
-  width: 160px;
+  width: 200px;
   height: 60px;
   cursor:pointer;
   font-size: 20px;
   border-radius: 4px;
-  font-family: lato;
+  letter-spacing: 2px;
+  font-family: Verdana, Helvetica, sans-serif, Tahoma, sans-serif;
 }
 
 .heart-bit-neon-inactive {
@@ -67,9 +87,9 @@ audio {
 }
 
 .change-button {
-  display: inline-block;
   cursor: pointer;
-  margin-top: 40px;
+  margin-top: 25px;
+  display: inline-block;
   border: 0px solid #000;
   background-color: transparent;
 }
@@ -81,6 +101,11 @@ audio {
   -o-animation: rotateBit 1.2s;
   -moz-animation: rotateBit 1.2s;
   -webkit-animation: rotateBit 1.2s;
+}
+
+.change-button-hide
+{
+  display: none;
 }
 
 @keyframes rotateBit {
