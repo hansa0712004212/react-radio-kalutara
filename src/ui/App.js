@@ -141,7 +141,7 @@ const App = () => {
             {mediaButtonText}
           </button>
           {isPlaying && <marquee behavior="scroll">
-            <iframe id="currentTrackFrame" key={iframeKey} title={`CurretTrack${iframeKey}`} src={CURRET_TRACK} referrerpolicy="origin-when-cross-origin"
+            <iframe id="currentTrackFrame" key={iframeKey} title={`CurretTrack${iframeKey}`} src={CURRET_TRACK}
               frameBorder="0" border="0" scrolling="no"
               style={{ border: "0px solid transparent", color: "red", height: 24, width: 190, overflow: "hidden", margin: 0, padding: 0 }} ></iframe>
           </marquee>
