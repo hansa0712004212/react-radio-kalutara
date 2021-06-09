@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import AudioSpectrum from "react-audio-spectrum";
+import { isMobileOnly } from "react-device-detect";
 import Sky from "react-sky";
 import RkImage from "../components/RkImage";
 import { MeterColors, Strings, Urls } from "../constants";
-import { IMAGE_CHANGE, IMAGE_CLOUD_SET, IMAGE_LOGO, IMAGE_LOVE_SET, IMAGE_WESAK_SET, WALLPAPER_SKY_2 } from "../resources";
+import { CURRET_TRACK } from "../constants/urls";
+import {
+  IMAGE_CHANGE, IMAGE_CHRISTMAS_SET, IMAGE_CLOUD_SET, IMAGE_LOGO, IMAGE_LOVE_SET, IMAGE_WESAK_SET,
+  WALLPAPER_CHRISTMAS, WALLPAPER_CHRISTMAS_DESKTOP, WALLPAPER_POSON, WALLPAPER_POSON_DESKTOP,
+  WALLPAPER_SKY, WALLPAPER_SKY_DESKTOP, WALLPAPER_VALENTINE, WALLPAPER_VALENTINE_DESKTOP,
+  WALLPAPER_WESAK, WALLPAPER_WESAK_DESKTOP
+} from "../resources";
 import "./App.css";
 
 const getWelcomeText = () => {
@@ -19,18 +26,50 @@ const getWelcomeText = () => {
   return text;
 };
 
-const getImageSet = () => {
+const getBackgroundStyleBuild = () => {
   const today = new Date();
-  const month = today.getMonth() + 1;
   const day = today.getDate();
+  const month = today.getMonth() + 1;
+  let size = "200px";
+  let howmuch = 30;
   let imageSet = IMAGE_CLOUD_SET;
-  if ((month === 5 && [26, 27].includes(day)) || (month === 6 && day === 24)) {
-    imageSet = IMAGE_WESAK_SET;
-  } else if ((month === 2 && day === 14)) {
-    imageSet = IMAGE_LOVE_SET;
+  let backgroundImage = (isMobileOnly) ? WALLPAPER_SKY.default : WALLPAPER_SKY_DESKTOP.default;
+  switch (month) {
+    case 2:
+      if (day === 14) {
+        howmuch = 90;
+        size = "50px";
+        imageSet = IMAGE_LOVE_SET;
+        backgroundImage = (isMobileOnly) ? WALLPAPER_VALENTINE.default : WALLPAPER_VALENTINE_DESKTOP.default;
+      }
+      break;
+    case 5:
+      if ([26, 27].includes(day)) {
+        howmuch = 60;
+        size = "50px";
+        imageSet = IMAGE_WESAK_SET;
+        backgroundImage = (isMobileOnly) ? WALLPAPER_WESAK.default : WALLPAPER_WESAK_DESKTOP.default;
+      }
+      break;
+    case 6:
+      if (day === 24) {
+        howmuch = 60;
+        size = "50px";
+        imageSet = IMAGE_WESAK_SET;
+        backgroundImage = (isMobileOnly) ? WALLPAPER_POSON.default : WALLPAPER_POSON_DESKTOP.default;
+      }
+      break;
+    case 12:
+      if (day === 25) {
+        howmuch = 90;
+        size = "50px";
+        imageSet = IMAGE_CHRISTMAS_SET;
+        backgroundImage = (isMobileOnly) ? WALLPAPER_CHRISTMAS.default : WALLPAPER_CHRISTMAS_DESKTOP.default;
+      }
+      break;
   }
-  return imageSet;
-};
+  return { backgroundImage, imageSet, size, howmuch }
+}
 
 const App = () => {
   const width = window.innerWidth;
@@ -40,11 +79,23 @@ const App = () => {
   const [meterColor, setMeterColor] = useState(MeterColors.RAINBOW);
   const [isPlaying, setIsPlaying] = useState(false);
   const [welcome, setWelcome] = useState(getWelcomeText());
-  const [imageSet] = useState(getImageSet());
+  const [backgroundBuilder] = useState(getBackgroundStyleBuild());
+  const [iframeKey, setIframeKey] = useState(0);
 
   useEffect(() => {
-    setInterval(() => setWelcome(getWelcomeText()), 60000);
-  });
+    setInterval(() => {
+      setWelcome(getWelcomeText());
+      if (isPlaying) {
+        setIframeKey(iframeKey + 1);
+      }
+    }, 60000);
+  }, []);
+
+  useEffect(() => {
+    if (isPlaying) {
+      setIframeKey(iframeKey + 1);
+    }
+  }, [isPlaying]);
 
   const play = (event) => {
     event.preventDefault();
@@ -77,7 +128,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ opacity: 0.9, backgroundImage: `url(${WALLPAPER_SKY_2.default})`, backgroundRepeat: "no-repeat", display: "flex", flex: 1, flexDirection: "column", justifyContent: "space-between", alignItems: "center", maxHeight: height, height: height }}>
+    <div style={{ opacity: 0.9, backgroundImage: `url(${backgroundBuilder.backgroundImage})`, backgroundRepeat: "no-repeat", display: "flex", flex: 1, flexDirection: "column", justifyContent: "space-between", alignItems: "center", maxHeight: height, height: height }}>
       <div style={{ position: "relative", display: "flex", flex: 1, flexDirection: "column", justifyContent: "space-between", alignItems: "center", maxHeight: height, height: height }}>
         <p id="welcome">{welcome}</p>
         <RkImage source={IMAGE_LOGO} width={200} height={200} />
@@ -89,7 +140,13 @@ const App = () => {
           <button className={`media-button ${isPlaying ? "heart-bit-neon" : "heart-bit-neon-inactive"}`} onClick={play} id="media-button">
             {mediaButtonText}
           </button>
-          <button className={`${isPlaying ? '' : 'change-button-hide'} change-button`} onClick={changeSpectrum}>
+          {isPlaying && <marquee behavior="scroll">
+            <iframe id="currentTrackFrame" key={iframeKey} title={`CurretTrack${iframeKey}`} src={CURRET_TRACK}
+              frameBorder="0" border="0" scrolling="no"
+              style={{ border: "0px solid transparent", color: "red", height: 24, width: 190, overflow: "hidden", margin: 0, padding: 0 }} ></iframe>
+          </marquee>
+          }
+          <button className={`${isPlaying ? "" : "change-button-hide"} change-button`} onClick={changeSpectrum}>
             <RkImage source={IMAGE_CHANGE} width={32} height={32} />
           </button>
         </div>
@@ -108,14 +165,14 @@ const App = () => {
           gap={2} />
       </div>
       <Sky
-        images={imageSet}
-        how={30} /* Pass the number of images Sky will render chosing randomly */
+        images={backgroundBuilder.imageSet}
+        how={backgroundBuilder.howmuch} /* Pass the number of images Sky will render chosing randomly */
         time={60} /* time of animation */
-        size={"100px"} /* size of the rendered images */
-        background={`url(${WALLPAPER_SKY_2.default})`} /* color of background */
+        size={backgroundBuilder.size} /* size of the rendered images */
+        background={`url(${backgroundBuilder.backgroundImage})`} /* color of background */
       />
     </div>
   );
-}
+};
 
 export default App;

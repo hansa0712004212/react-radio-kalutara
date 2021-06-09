@@ -13,8 +13,16 @@ export const IMAGE_CHRISTMAS_3 = require("./images/christmas_3.png");
 export const IMAGE_CHRISTMAS_4 = require("./images/christmas_4.png");
 export const IMAGE_CHRISTMAS_5 = require("./images/christmas_5.png");
 
-export const WALLPAPER_SKY_1 = require("./images/wallpaper1.jpg");
-export const WALLPAPER_SKY_2 = require("./images/wallpaper2.jpg");
+export const WALLPAPER_SKY = require("./images/wallpaper_sky.jpg");
+export const WALLPAPER_SKY_DESKTOP = require("./images/wallpaper_sky_desktop.jpg");
+export const WALLPAPER_POSON = require("./images/wallpaper_poson.jpg");
+export const WALLPAPER_POSON_DESKTOP = require("./images/wallpaper_poson_desktop.jpg");
+export const WALLPAPER_WESAK = require("./images/wallpaper_wesak.jpg");
+export const WALLPAPER_WESAK_DESKTOP = require("./images/wallpaper_wesak_desktop.jpg");
+export const WALLPAPER_VALENTINE = require("./images/wallpaper_valentine.jpg");
+export const WALLPAPER_VALENTINE_DESKTOP = require("./images/wallpaper_valentine_desktop.jpg");
+export const WALLPAPER_CHRISTMAS = require("./images/wallpaper_christmas.jpg");
+export const WALLPAPER_CHRISTMAS_DESKTOP = require("./images/wallpaper_christmas_desktop.jpg");
 
 export const IMAGE_LOVE_SET = {
   0: IMAGE_LOVE_1.default,
