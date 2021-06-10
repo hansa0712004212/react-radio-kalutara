@@ -74,9 +74,8 @@ const getBackgroundStyleBuild = () => {
 const App = () => {
   const width = window.innerWidth;
   const height = window.innerHeight;
-  const [spectrumIndex, setSpectrumIndex] = useState(0);
+  const [spectrumIndex, setSpectrumIndex] = useState(2);
   const [mediaButtonText, setMediaButtonText] = useState(Strings.PLAY);
-  const [meterColor, setMeterColor] = useState(MeterColors.RAINBOW);
   const [isPlaying, setIsPlaying] = useState(false);
   const [welcome, setWelcome] = useState(getWelcomeText());
   const [backgroundBuilder] = useState(getBackgroundStyleBuild());
@@ -104,7 +103,6 @@ const App = () => {
       setMediaButtonText(Strings.PLAY);
       player.pause();
       setIsPlaying(false);
-      setMeterColor(MeterColors.LIST[2]);
     } else {
       setMediaButtonText(Strings.PAUSE);
       player.play();
@@ -121,7 +119,6 @@ const App = () => {
     }
     setSpectrumIndex(index);
     player.pause();
-    setMeterColor(MeterColors.LIST[index]);
     player.play();
     let mediaButton = document.getElementById("media-button");
     mediaButton.focus();
@@ -157,12 +154,12 @@ const App = () => {
           height={200}
           width={width}
           audioId={"audio-element"}
-          capColor={meterColor[meterColor.length - 1].color}
+          capColor={MeterColors.LIST[spectrumIndex][MeterColors.LIST[spectrumIndex].length - 1].color}
           capHeight={2}
           meterWidth={6}
           meterCount={512}
-          meterColor={meterColor}
-          gap={2} />
+          meterColor={MeterColors.LIST[spectrumIndex]}
+          gap={0.75} />
       </div>
       <Sky
         images={backgroundBuilder.imageSet}
