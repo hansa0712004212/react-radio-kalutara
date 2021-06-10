@@ -140,11 +140,11 @@ const App = () => {
           <button className={`media-button ${isPlaying ? "heart-bit-neon" : "heart-bit-neon-inactive"}`} onClick={play} id="media-button">
             {mediaButtonText}
           </button>
-          {isPlaying && <marquee behavior="scroll">
+          {isPlaying && <object><marquee behavior="scroll">
             <iframe id="currentTrackFrame" key={iframeKey} title={`CurretTrack${iframeKey}`} src={CURRET_TRACK}
-              border="0" scrolling="no" sandbox
+              border="0" scrolling="no" sandbox=""
               style={{ border: "0px solid transparent", color: "red", height: 24, width: 190, overflow: "hidden", margin: 0, padding: 0 }} ></iframe>
-          </marquee>
+          </marquee></object>
           }
           <button className={`${isPlaying ? "" : "change-button-hide"} change-button`} onClick={changeSpectrum}>
             <RkImage source={IMAGE_CHANGE} width={32} height={32} />
