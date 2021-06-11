@@ -79,22 +79,12 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [welcome, setWelcome] = useState(getWelcomeText());
   const [backgroundBuilder] = useState(getBackgroundStyleBuild());
-  const [iframeKey, setIframeKey] = useState(0);
 
   useEffect(() => {
     setInterval(() => {
       setWelcome(getWelcomeText());
-      if (isPlaying) {
-        setIframeKey(iframeKey + 1);
-      }
     }, 60000);
   }, []);
-
-  useEffect(() => {
-    if (isPlaying) {
-      setIframeKey(iframeKey + 1);
-    }
-  }, [isPlaying]);
 
   const play = (event) => {
     event.preventDefault();
@@ -137,10 +127,6 @@ const App = () => {
           <button className={`media-button ${isPlaying ? "heart-bit-neon" : "heart-bit-neon-inactive"}`} onClick={play} id="media-button">
             {mediaButtonText}
           </button>
-          {isPlaying && <marquee behavior="scroll">
-            <embed type="text/html" src={CURRET_TRACK} height="48px" width="100%" />
-          </marquee>
-          }
           <button className={`${isPlaying ? "" : "change-button-hide"} change-button`} onClick={changeSpectrum}>
             <RkImage source={IMAGE_CHANGE} width={32} height={32} />
           </button>
