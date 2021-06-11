@@ -138,7 +138,7 @@ const App = () => {
             {mediaButtonText}
           </button>
           {isPlaying && <marquee behavior="scroll">
-            <object id="currentTrackFrame" key={iframeKey} data={CURRET_TRACK} height="48px" width="100%" ></object>
+            <embed type="text/html" src={CURRET_TRACK} height="48px" width="100%" />
           </marquee>
           }
           <button className={`${isPlaying ? "" : "change-button-hide"} change-button`} onClick={changeSpectrum}>
