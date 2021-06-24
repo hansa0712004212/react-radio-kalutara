@@ -79,12 +79,22 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [welcome, setWelcome] = useState(getWelcomeText());
   const [backgroundBuilder] = useState(getBackgroundStyleBuild());
+  const [iframeKey, setIframeKey] = useState(0);
 
   useEffect(() => {
     setInterval(() => {
       setWelcome(getWelcomeText());
+      if (isPlaying) {
+        setIframeKey(iframeKey + 1);
+      }
     }, 60000);
   }, []);
+
+  useEffect(() => {
+    if (isPlaying) {
+      setIframeKey(iframeKey + 1);
+    }
+  }, [isPlaying]);
 
   const play = (event) => {
     event.preventDefault();
@@ -120,13 +130,21 @@ const App = () => {
         <p id="welcome">{welcome}</p>
         <RkImage source={IMAGE_LOGO} width={200} height={200} />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center" }}>
-          <audio controls id="audio-element" autoPlay={false} crossOrigin="anonymous" preload="auto">
+          <audio controls id="audio-element" autoPlay={false} crossOrigin="anonymous" preload="none">
             <source src={Urls.PRIMARY_STREAM} type="audio/mpeg" />
             <source src={Urls.PRIMARY_STREAM} type="audio/mp3" />
+            <source src={Urls.PRIMARY_STREAM} type="audio/ogg" />
           </audio>
           <button className={`media-button ${isPlaying ? "heart-bit-neon" : "heart-bit-neon-inactive"}`} onClick={play} id="media-button">
             {mediaButtonText}
           </button>
+          {isPlaying && <marquee behavior="scroll">
+            <iframe id="currentTrackFrame" key={iframeKey} title={`CurretTrack${iframeKey}`} src={CURRET_TRACK}
+              border="0" scrolling="no"
+              style={{ border: "0px solid transparent", color: "red", height: 24, width: 190, overflow: "hidden", margin: 0, padding: 0 }} >
+            </iframe>
+          </marquee>
+          }
           <button className={`${isPlaying ? "" : "change-button-hide"} change-button`} onClick={changeSpectrum}>
             <RkImage source={IMAGE_CHANGE} width={32} height={32} />
           </button>
