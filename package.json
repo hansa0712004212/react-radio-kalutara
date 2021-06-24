@@ -1,6 +1,7 @@
 {
   "name": "react-radio-kalutara",
   "version": "0.1.0",
+  "homepage": "http://online.radiokalutara.lk/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.13.0",
