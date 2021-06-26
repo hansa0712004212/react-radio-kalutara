@@ -18,6 +18,7 @@ audio {
 }
 
 #welcome {
+  padding-top: 6px;
   color: white;
   font-size: 24px;
   text-align: center;

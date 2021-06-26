@@ -4,6 +4,8 @@ export const IMAGE_LOVE_1 = require("./images/love_1.png");
 export const IMAGE_LOVE_2 = require("./images/love_2.png");
 export const IMAGE_CLOUD_1 = require("./images/cloud_1.png");
 export const IMAGE_CLOUD_2 = require("./images/cloud_2.png");
+export const IMAGE_CLOUD_3 = require("./images/cloud_3.png");
+export const IMAGE_CLOUD_4 = require("./images/cloud_4.png");
 export const IMAGE_WESAK_1 = require("./images/wesak_1.png");
 export const IMAGE_WESAK_2 = require("./images/wesak_2.png");
 export const IMAGE_WESAK_3 = require("./images/wesak_3.png");
@@ -31,7 +33,9 @@ export const IMAGE_LOVE_SET = {
 
 export const IMAGE_CLOUD_SET = {
   0: IMAGE_CLOUD_1.default,
-  1: IMAGE_CLOUD_2.default
+  1: IMAGE_CLOUD_2.default,
+  2: IMAGE_CLOUD_3.default,
+  3: IMAGE_CLOUD_4.default
 }
 
 export const IMAGE_WESAK_SET = {

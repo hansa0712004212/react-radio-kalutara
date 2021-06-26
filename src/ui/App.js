@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AudioSpectrum from "react-audio-spectrum";
 import { isMobileOnly } from "react-device-detect";
+import LazyLoad from 'react-lazyload';
 import Sky from "react-sky";
 import RkImage from "../components/RkImage";
 import { MeterColors, Strings, Urls } from "../constants";
@@ -30,7 +31,7 @@ const getBackgroundStyleBuild = () => {
   const today = new Date();
   const day = today.getDate();
   const month = today.getMonth() + 1;
-  let size = "200px";
+  let size = "150px";
   let howmuch = 30;
   let imageSet = IMAGE_CLOUD_SET;
   let backgroundImage = (isMobileOnly) ? WALLPAPER_SKY.default : WALLPAPER_SKY_DESKTOP.default;
@@ -52,7 +53,12 @@ const getBackgroundStyleBuild = () => {
       }
       break;
     case 6:
-      if (day === 24) {
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+      if ((month === 6 && day === 24) || (month === 7 && day === 23) || (month === 8 && day === 22) || (month === 9 && day === 20) || (month === 10 && day === 20) || (month === 11 && day === 18)) {
         howmuch = 60;
         size = "50px";
         imageSet = IMAGE_WESAK_SET;
@@ -65,6 +71,12 @@ const getBackgroundStyleBuild = () => {
         size = "50px";
         imageSet = IMAGE_CHRISTMAS_SET;
         backgroundImage = (isMobileOnly) ? WALLPAPER_CHRISTMAS.default : WALLPAPER_CHRISTMAS_DESKTOP.default;
+      }
+      if (day === 18) {
+        howmuch = 60;
+        size = "50px";
+        imageSet = IMAGE_WESAK_SET;
+        backgroundImage = (isMobileOnly) ? WALLPAPER_POSON.default : WALLPAPER_POSON_DESKTOP.default;
       }
       break;
   }
@@ -128,7 +140,9 @@ const App = () => {
     <div style={{ opacity: 0.9, backgroundImage: `url(${backgroundBuilder.backgroundImage})`, backgroundRepeat: "no-repeat", display: "flex", flex: 1, flexDirection: "column", justifyContent: "space-between", alignItems: "center", maxHeight: height, height: height }}>
       <div style={{ position: "relative", display: "flex", flex: 1, flexDirection: "column", justifyContent: "space-between", alignItems: "center", maxHeight: height, height: height }}>
         <p id="welcome">{welcome}</p>
-        <RkImage source={IMAGE_LOGO} width={200} height={200} />
+        <LazyLoad height={200} once={true}>
+          <RkImage source={IMAGE_LOGO} width={200} height={200} />
+        </LazyLoad>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center" }}>
           <audio controls id="audio-element" autoPlay={false} crossOrigin="anonymous" preload="none">
             <source src={Urls.PRIMARY_STREAM} type="audio/mpeg" />
@@ -141,35 +155,40 @@ const App = () => {
           {isPlaying && <marquee behavior="scroll">
             <iframe id="currentTrackFrame" key={iframeKey} title={`CurretTrack${iframeKey}`} src={CURRET_TRACK}
               border="0" scrolling="no"
-              style={{ border: "0px solid transparent", color: "red", height: 24, width: 190, overflow: "hidden", margin: 0, padding: 0 }} >
+              style={{ border: "0px solid transparent", height: 48, overflow: "hidden", margin: 0, padding: 0 }} >
             </iframe>
           </marquee>
           }
-          <button className={`${isPlaying ? "" : "change-button-hide"} change-button`} onClick={changeSpectrum}>
-            <RkImage source={IMAGE_CHANGE} width={32} height={32} />
-          </button>
+          <LazyLoad height={32}>
+            <button className={`change-button ${isPlaying ? "" : "change-button-hide"}`} onClick={changeSpectrum}>
+              <RkImage source={IMAGE_CHANGE} width={32} height={32} />
+            </button>
+          </LazyLoad>
         </div>
-        <br />
-        <AudioSpectrum
-          id="audio-canvas"
-          crossOrigin="anonymous"
-          height={200}
-          width={width}
-          audioId={"audio-element"}
-          capColor={MeterColors.LIST[spectrumIndex][MeterColors.LIST[spectrumIndex].length - 1].color}
-          capHeight={2}
-          meterWidth={6}
-          meterCount={512}
-          meterColor={MeterColors.LIST[spectrumIndex]}
-          gap={0.75} />
+        <LazyLoad height={200} once={true}>
+          <AudioSpectrum
+            id="audio-canvas"
+            crossOrigin="anonymous"
+            height={200}
+            width={width}
+            audioId={"audio-element"}
+            capColor={MeterColors.LIST[spectrumIndex][MeterColors.LIST[spectrumIndex].length - 1].color}
+            capHeight={2}
+            meterWidth={6}
+            meterCount={512}
+            meterColor={MeterColors.LIST[spectrumIndex]}
+            gap={0.75} />
+        </LazyLoad>
       </div>
-      <Sky
-        images={backgroundBuilder.imageSet}
-        how={backgroundBuilder.howmuch} /* Pass the number of images Sky will render chosing randomly */
-        time={60} /* time of animation */
-        size={backgroundBuilder.size} /* size of the rendered images */
-        background={`url(${backgroundBuilder.backgroundImage})`} /* color of background */
-      />
+      <LazyLoad height={"100%"} once={true}>
+        <Sky
+          images={backgroundBuilder.imageSet}
+          how={backgroundBuilder.howmuch} /* Pass the number of images Sky will render chosing randomly */
+          time={60} /* time of animation */
+          size={backgroundBuilder.size} /* size of the rendered images */
+          background={`url(${backgroundBuilder.backgroundImage})`} /* color of background */
+        />
+      </LazyLoad>
     </div>
   );
 };
